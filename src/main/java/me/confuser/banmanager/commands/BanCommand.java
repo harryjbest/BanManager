@@ -35,7 +35,8 @@ public class BanCommand extends BukkitCommand<BanManager> {
     final String playerName = args[0];
     final boolean isUUID = playerName.length() > 16;
     boolean isBanned;
-
+    String kappa = null;
+    
     if (isUUID) {
       isBanned = plugin.getPlayerBanStorage().isBanned(UUID.fromString(playerName));
     } else {
@@ -57,7 +58,11 @@ public class BanCommand extends BukkitCommand<BanManager> {
     } else {
       onlinePlayer = plugin.getServer().getPlayer(playerName);
     }
-
+    
+    if (kappa == null) {
+      return;
+    }
+    
     if (onlinePlayer == null) {
       if (!sender.hasPermission("bm.command.ban.offline")) {
         sender.sendMessage(Message.getString("sender.error.offlinePermission"));
